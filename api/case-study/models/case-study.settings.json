@@ -1,0 +1,32 @@
+{
+  "uid": "application::case-study.case-study",
+  "collectionName": "case_studies",
+  "kind": "collectionType",
+  "info": { "name": "Case Study", "description": "" },
+  "options": {
+    "increments": true,
+    "timestamps": ["created_at", "updated_at"],
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Style": { "type": "enumeration", "enum": ["New", "Old"] },
+    "Title": { "type": "string" },
+    "Client_Name": { "type": "string" },
+    "Path": {
+      "type": "string",
+      "default": "/case-study/example-name",
+      "unique": true
+    },
+    "Featured": {
+      "type": "enumeration",
+      "enum": ["True", "False"],
+      "default": "False"
+    },
+    "Related_Case_Studies": {
+      "collection": "case-study",
+      "attribute": "case-study",
+      "column": "id",
+      "isVirtual": true
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "uid": "application::staff-profile.staff-profile",
+  "collectionName": "staff_profiles",
+  "kind": "collectionType",
+  "info": { "name": "Staff Profile", "description": "" },
+  "options": {
+    "increments": true,
+    "timestamps": ["created_at", "updated_at"],
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Path": {
+      "type": "string",
+      "unique": true,
+      "default": "/team/example-name",
+      "required": true
+    },
+    "Name": { "type": "string" },
+    "Personal_Pronouns": { "type": "string", "default": "example/example" },
+    "Image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": ["images"],
+      "plugin": "upload",
+      "required": false
+    },
+    "Audio": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": ["files"],
+      "plugin": "upload",
+      "required": false
+    },
+    "Pronunciation": { "type": "string" },
+    "Role": { "type": "string" },
+    "Location": {
+      "type": "string",
+      "default": "City, Full State or Province Name"
+    },
+    "Quote": { "type": "text" },
+    "Social": {
+      "type": "component",
+      "repeatable": true,
+      "component": "staff-profile.social"
+    },
+    "Specialty": {
+      "type": "component",
+      "repeatable": true,
+      "component": "staff-profile.specialty",
+      "max": 4
+    },
+    "Body": { "type": "richtext" }
+  }
+}
