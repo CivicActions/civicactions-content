@@ -1,0 +1,62 @@
+{
+  "uid": "case-study.new-style",
+  "collectionName": "components_case_study_new_styles",
+  "info": { "name": "New_Style", "icon": "address-card", "description": "" },
+  "options": { "timestamps": false },
+  "attributes": {
+    "Preview_Image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": ["images"],
+      "plugin": "upload",
+      "required": false
+    },
+    "Quote": {
+      "type": "component",
+      "repeatable": false,
+      "component": "case-study.quote"
+    },
+    "Impact_Stat": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.figure",
+      "max": 3
+    },
+    "Challenge_Text": { "type": "richtext" },
+    "Client_Goal_Text": { "type": "richtext" },
+    "Client_Goal_Bullet": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.bullet"
+    },
+    "Expertise": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.bullet"
+    },
+    "Technology": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.bullet"
+    },
+    "Approach_Image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": ["images"],
+      "plugin": "upload",
+      "required": false
+    },
+    "Approach_Text": { "type": "richtext" },
+    "Approach_Section": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.approach-section"
+    },
+    "Outcome": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.outcome"
+    },
+    "Explore": { "type": "richtext" }
+  }
+}
