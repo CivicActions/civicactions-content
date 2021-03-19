@@ -1,0 +1,17 @@
+{
+  "uid": "case-study.approach-section",
+  "collectionName": "components_case_study_approach_sections",
+  "info": { "name": "Approach_Section", "icon": "align-justify" },
+  "options": { "timestamps": false },
+  "attributes": {
+    "Title": { "type": "string" },
+    "Text": { "type": "richtext" },
+    "Image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": ["images", "files", "videos"],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

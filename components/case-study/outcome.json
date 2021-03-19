@@ -1,0 +1,17 @@
+{
+  "uid": "case-study.outcome",
+  "collectionName": "components_case_study_outcomes",
+  "info": { "name": "Outcome", "icon": "align-left" },
+  "options": { "timestamps": false },
+  "attributes": {
+    "Title": { "type": "string" },
+    "Icon": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": ["images", "files", "videos"],
+      "plugin": "upload",
+      "required": false
+    },
+    "Caption": { "type": "richtext" }
+  }
+}

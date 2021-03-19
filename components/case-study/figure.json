@@ -1,0 +1,10 @@
+{
+  "uid": "case-study.figure",
+  "collectionName": "components_case_study_figures",
+  "info": { "name": "Figure", "icon": "air-freshener", "description": "" },
+  "options": { "timestamps": false },
+  "attributes": {
+    "Header": { "type": "string" },
+    "Text": { "type": "string", "default": "line one<br> line two" }
+  }
+}

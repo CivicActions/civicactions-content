@@ -1,0 +1,7 @@
+{
+  "uid": "case-study.quote",
+  "collectionName": "components_case_study_quotes",
+  "info": { "name": "Quote", "icon": "adjust" },
+  "options": { "timestamps": false },
+  "attributes": { "Quote": { "type": "text" }, "Source": { "type": "string" } }
+}
