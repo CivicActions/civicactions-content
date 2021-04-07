@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services_categories",
+  "info": {
+    "name": "Services Category",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Icon": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Use_Case": {
+      "type": "component",
+      "repeatable": true,
+      "component": "settings.use-case"
+    },
+    "Offering": {
+      "type": "component",
+      "repeatable": true,
+      "component": "staff-profile.social"
+    },
+    "CTA_Title": {
+      "type": "string"
+    },
+    "CTA_Link": {
+      "type": "string"
+    }
+  }
+}

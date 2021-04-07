@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_settings_use_cases",
+  "info": {
+    "name": "Use_Case",
+    "icon": "american-sign-language-interpreting"
+  },
+  "options": {},
+  "attributes": {
+    "client": {
+      "type": "string"
+    },
+    "Link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "staff-profile.social"
+    }
+  }
+}
