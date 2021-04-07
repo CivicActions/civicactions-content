@@ -8,4 +8,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: azure/setup-kubectl@v1
-      - run: kubectl cluster-info
+      - run: kubectl apply -f k8s/civicactions-content.yaml
