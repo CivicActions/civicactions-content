@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta11
+kind: Config
+metadata:
+  name: civicactions-content
+build:
+  cluster:
+    namespace: civicactions-content
+    pullSecretPath: kaniko-secret
+    pullSecretMountPath: /secret
+  artifacts:
+    - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
+deploy:
+  kubectl:
+    manifests:
+    - k8s/civicactions-content.yaml

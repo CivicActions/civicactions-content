@@ -7,5 +7,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v1
-      - uses: azure/setup-kubectl@v1
-      - run: kubectl apply -f k8s/civicactions-content.yaml
+      - name: Run Skaffold pipeline
+        uses: hiberbee/github-action-skaffold@latest
+        with:
+          command: run
