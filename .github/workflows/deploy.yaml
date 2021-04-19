@@ -10,6 +10,7 @@ jobs:
       volumes:
         - ${{ github.workspace }}:/skaffold
         - /var/run/secrets/kubernetes.io/serviceaccount:/var/run/secrets/kubernetes.io/serviceaccount
+        - /secret/kaniko-secret:/secret/kaniko-secret
       env:
         KUBERNETES_SERVICE_HOST: ${{ env.KUBERNETES_SERVICE_HOST }}
         KUBERNETES_SERVICE_PORT: ${{ env.KUBERNETES_SERVICE_PORT }}
