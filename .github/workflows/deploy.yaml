@@ -11,4 +11,5 @@ jobs:
         - ${{ github.workspace }}:/skaffold
     steps:
       - uses: actions/checkout@v1
-      - run: skaffold build --dry-run
+      - run: skaffold build
+      - run: skaffold deploy
