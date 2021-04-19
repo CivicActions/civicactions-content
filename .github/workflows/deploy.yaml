@@ -9,6 +9,10 @@ jobs:
       image: gcr.io/k8s-skaffold/skaffold:v1.22.0
       volumes:
         - ${{ github.workspace }}:/skaffold
+        - /var/run/secrets/kubernetes.io/serviceaccount:/var/run/secrets/kubernetes.io/serviceaccount
+      env:
+        - KUBERNETES_SERVICE_HOST=${{ env.KUBERNETES_SERVICE_HOST }}
+        - KUBERNETES_SERVICE_PORT=${{ env.KUBERNETES_SERVICE_PORT }}
     steps:
       - uses: actions/checkout@v1
       - run: skaffold build
