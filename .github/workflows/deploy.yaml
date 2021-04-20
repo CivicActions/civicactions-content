@@ -3,17 +3,21 @@ on:
     branches:
       - main
 jobs:
+  env:
+    SKAFFOLD_VERSION: v1.22.0
+    SKAFFOLD_HASH: 9bd85d4b31eeaea9e12d2f4f5128bfce8834a0fe7969101cbe994c04141af621
   deploy:
     runs-on: self-hosted
-    container:
-      image: gcr.io/k8s-skaffold/skaffold:v1.22.0
-      volumes:
-        - ${{ github.workspace }}:/skaffold
-        - /var/run/secrets/kubernetes.io/serviceaccount:/var/run/secrets/kubernetes.io/serviceaccount
-      env:
-        KUBERNETES_SERVICE_HOST: ${{ env.KUBERNETES_SERVICE_HOST }}
-        KUBERNETES_SERVICE_PORT: ${{ env.KUBERNETES_SERVICE_PORT }}
     steps:
       - uses: actions/checkout@v1
+      - run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/${{ env.SKAFFOLD_VERSION }}/skaffold-linux-amd64
+      - run: |
+          echo "Checking hash before install"
+          if [ "$(sha256sum < skaffold | head -c 64)" = "${{ env.SKAFFOLD_HASH }}" ]; then \
+            sudo install skaffold /usr/local/bin/; \
+          else \
+            echo "Hash mismatch"; \
+            exit 1; \
+          fi
       - run: skaffold build
       - run: skaffold deploy
