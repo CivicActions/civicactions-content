@@ -1,10 +1,10 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: helloworld-php
+  name: civicactions-content
   namespace: civicactions-content
 spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-samples/helloworld-go
+        - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
