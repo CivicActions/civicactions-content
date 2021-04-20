@@ -17,7 +17,7 @@ jobs:
           registry: gcr.io
           username: _json_key
           password: ${{ secrets.GCR_KEY }}
-      - run: kubectl --dry-run=client -o yaml --namespace civicactions-content create secret generic kaniko-secret --from-literal=kaniko-secret="${{ secrets.GCR_KEY }}" | kubectl apply -f -
+      - run: kubectl --dry-run=client -o yaml --namespace civicactions-content create secret generic kaniko-secret --from-literal=kaniko-secret='${{ secrets.GCR_KEY }}' | kubectl apply -f -
       - run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/${{ env.SKAFFOLD_VERSION }}/skaffold-linux-amd64
       - run: |
           echo "Checking hash before install"
