@@ -7,6 +7,7 @@ build:
     namespace: civicactions-content
     pullSecretPath: kaniko-secret
     pullSecretMountPath: /secret
+    cache: {}
   artifacts:
     - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
 deploy:
