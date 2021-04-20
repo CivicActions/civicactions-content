@@ -11,8 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: azure/setup-kubectl@v1
-      # Log in to GCR with K8s Docker and Kaniko:
-kubectl --dry-run=client -o yaml --namespace civicactions-content create secret docker-registry regcred --docker-server=gcr.io --docker-username=_json_key --docker-password="${GITHUB_ACTIONS_GCLOUD}" --docker-email=it+cicd-docker@civicactions.com | kubectl apply -f -
       - name: Set imagePullSecret
         uses: azure/k8s-create-secret@v1
         with:
