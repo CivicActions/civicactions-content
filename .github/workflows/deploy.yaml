@@ -19,5 +19,5 @@ jobs:
             echo "Hash mismatch"; \
             exit 1; \
           fi
-      - run: skaffold build
+      - run: skaffold build --verbosity debug
       - run: skaffold deploy
