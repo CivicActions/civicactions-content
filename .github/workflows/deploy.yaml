@@ -10,6 +10,7 @@ jobs:
       SKAFFOLD_HASH: 9bd85d4b31eeaea9e12d2f4f5128bfce8834a0fe7969101cbe994c04141af621
     steps:
       - uses: actions/checkout@v1
+      - uses: azure/setup-kubectl@v1
       - run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/${{ env.SKAFFOLD_VERSION }}/skaffold-linux-amd64
       - run: |
           echo "Checking hash before install"
