@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: azure/setup-kubectl@v1
+      - run: kubectl config set-context cicd
+      - run: kubectl config use-context cicd
       - name: Set imagePullSecret
         uses: azure/k8s-create-secret@v1
         with:
