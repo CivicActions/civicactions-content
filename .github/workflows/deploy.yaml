@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: azure/setup-kubectl@v1
       - name: Auth Kubernetes to GCR
-        run: kubectl --dry-run=client -o yaml --namespace civicactions-content create secret docker-registry regcred --docker-server=gcr.io --docker-username=_json_key --docker-password="${{ secrets.GCR_KEY }}" --docker-email=cicd-docker@example.com | kubectl apply -f -
+        run: kubectl --dry-run=client -o yaml --namespace civicactions-content create secret docker-registry regcred --docker-server=gcr.io --docker-username=_json_key --docker-password='${{ secrets.GCR_KEY }}' --docker-email=cicd-docker@example.com | kubectl apply -f -
       - name: Auth Kaniko to GCR
         run: kubectl --dry-run=client -o yaml --namespace civicactions-content create secret generic kaniko-secret --from-literal=kaniko-secret='${{ secrets.GCR_KEY }}' | kubectl apply -f -
       - name: Auth Docker to GCR
