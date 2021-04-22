@@ -10,3 +10,19 @@ spec:
         - name: regcred
       containers:
         - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
+          env:
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: DATABASE_HOST
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: DATABASE_PASSWORD
+            - name: GCS_SERVICE_ACCOUNT
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: GCS_SERVICE_ACCOUNT
