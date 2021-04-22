@@ -26,3 +26,13 @@ spec:
                 secretKeyRef:
                   name: civicactions-content
                   key: GCS_SERVICE_ACCOUNT
+            - name: USER_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: USER_JWT_SECRET
+            - name: ADMIN_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: ADMIN_JWT_SECRET
