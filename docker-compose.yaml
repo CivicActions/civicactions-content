@@ -3,6 +3,7 @@ services:
   strapi:
     build: .
     environment:
+      NODE_ENV: development
       DATABASE_CLIENT: postgres
       DATABASE_NAME: strapi
       DATABASE_HOST: postgres
