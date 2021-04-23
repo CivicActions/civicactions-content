@@ -7,12 +7,12 @@ USER node
 WORKDIR /srv/app
 ENV PATH=${PATH}:/srv/app/node_modules/.bin
 
-COPY ./package.json ./
-COPY ./yarn.lock ./
+COPY --chown=node:node ./package.json ./
+COPY --chown=node:node ./yarn.lock ./
 
 RUN yarn install
 
-COPY . .
+COPY --chown=node:node . .
 
 ENV NODE_ENV production
 
