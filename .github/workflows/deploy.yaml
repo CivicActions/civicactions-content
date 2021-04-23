@@ -46,6 +46,7 @@ jobs:
           --from-literal=ADMIN_JWT_SECRET='${{ secrets. ADMIN_JWT_SECRET}}' \
           --from-literal=DATABASE_HOST='${{ secrets.DATABASE_HOST }}' \
           --from-literal=DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}' \
+          --from-literal=MAILGUN_API_KEY='${{ secrets.DATABASE_PASSWORD }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -
       - name: Run Skaffold
         run: skaffold run

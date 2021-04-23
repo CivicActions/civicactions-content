@@ -36,3 +36,8 @@ spec:
                 secretKeyRef:
                   name: civicactions-content
                   key: ADMIN_JWT_SECRET
+            - name: MAILGUN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: MAILGUN_API_KEY
