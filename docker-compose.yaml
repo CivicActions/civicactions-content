@@ -11,7 +11,11 @@ services:
       DATABASE_USERNAME: strapi
       DATABASE_PASSWORD: strapi
       ADMIN_JWT_SECRET: not-secret-development-only
-    command: strapi develop
+      USER_JWT_SECRET: not-secret-development-only
+      JWT_SECRET: not-secret-development-only
+    volumes:
+      - .:/srv/app
+    command: sh -c 'yarn install && strapi develop'
     ports:
       - '1337:1337'
     depends_on:
