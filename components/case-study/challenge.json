@@ -1,10 +1,19 @@
 {
-  "uid": "case-study.challenge",
   "collectionName": "components_case_study_challenges",
-  "info": { "name": "Challenge", "icon": "align-center" },
-  "options": { "timestamps": false },
+  "info": {
+    "name": "Challenge",
+    "icon": "align-center",
+    "description": ""
+  },
+  "options": {
+    "timestamps": false
+  },
   "attributes": {
-    "Text": { "type": "richtext" },
-    "Goal_Text": { "type": "richtext" }
+    "Challenge": {
+      "type": "richtext"
+    },
+    "Client_Goal": {
+      "type": "richtext"
+    }
   }
 }

@@ -1,17 +1,19 @@
 {
-  "uid": "case-study.outcome",
   "collectionName": "components_case_study_outcomes",
-  "info": { "name": "Outcome", "icon": "align-left" },
-  "options": { "timestamps": false },
+  "info": {
+    "name": "Outcome",
+    "icon": "align-left",
+    "description": ""
+  },
+  "options": {
+    "timestamps": false
+  },
   "attributes": {
-    "Title": { "type": "string" },
-    "Icon": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": ["images", "files", "videos"],
-      "plugin": "upload",
-      "required": false
+    "Title": {
+      "type": "string"
     },
-    "Caption": { "type": "richtext" }
+    "Text": {
+      "type": "richtext"
+    }
   }
 }
