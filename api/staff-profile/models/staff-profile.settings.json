@@ -1,11 +1,16 @@
 {
-  "uid": "application::staff-profile.staff-profile",
-  "collectionName": "staff_profiles",
   "kind": "collectionType",
-  "info": { "name": "Staff Profile", "description": "" },
+  "collectionName": "staff_profiles",
+  "info": {
+    "name": "Staff Profile",
+    "description": ""
+  },
   "options": {
     "increments": true,
-    "timestamps": ["created_at", "updated_at"],
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
     "draftAndPublish": true
   },
   "attributes": {
@@ -15,29 +20,44 @@
       "default": "/team/example-name",
       "required": true
     },
-    "Name": { "type": "string" },
-    "Personal_Pronouns": { "type": "string", "default": "example/example" },
+    "Name": {
+      "type": "string"
+    },
+    "Personal_Pronouns": {
+      "type": "string",
+      "default": "example/example"
+    },
     "Image": {
       "model": "file",
       "via": "related",
-      "allowedTypes": ["images"],
+      "allowedTypes": [
+        "images"
+      ],
       "plugin": "upload",
       "required": false
     },
     "Audio": {
       "model": "file",
       "via": "related",
-      "allowedTypes": ["files"],
+      "allowedTypes": [
+        "files"
+      ],
       "plugin": "upload",
       "required": false
     },
-    "Pronunciation": { "type": "string" },
-    "Role": { "type": "string" },
+    "Pronunciation": {
+      "type": "string"
+    },
+    "Role": {
+      "type": "string"
+    },
     "Location": {
       "type": "string",
       "default": "City, Full State or Province Name"
     },
-    "Quote": { "type": "text" },
+    "Quote": {
+      "type": "text"
+    },
     "Social": {
       "type": "component",
       "repeatable": true,
@@ -49,6 +69,12 @@
       "component": "staff-profile.specialty",
       "max": 4
     },
-    "Body": { "type": "richtext" }
+    "Body": {
+      "type": "richtext"
+    },
+    "case_study": {
+      "via": "staff_profiles",
+      "model": "case-study"
+    }
   }
 }

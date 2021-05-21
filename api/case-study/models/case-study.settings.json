@@ -1,32 +1,118 @@
 {
-  "uid": "application::case-study.case-study",
-  "collectionName": "case_studies",
   "kind": "collectionType",
-  "info": { "name": "Case Study", "description": "" },
+  "collectionName": "case_studies",
+  "info": {
+    "name": "Case Study",
+    "description": ""
+  },
   "options": {
     "increments": true,
-    "timestamps": ["created_at", "updated_at"],
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
     "draftAndPublish": true
   },
   "attributes": {
-    "Style": { "type": "enumeration", "enum": ["New", "Old"] },
-    "Title": { "type": "string" },
-    "Client_Name": { "type": "string" },
+    "Title": {
+      "type": "string"
+    },
+    "Client_Name": {
+      "type": "string"
+    },
     "Path": {
       "type": "string",
       "default": "/case-study/example-name",
       "unique": true
     },
-    "Featured": {
+    "Promoted_to_Homepage": {
       "type": "enumeration",
-      "enum": ["True", "False"],
+      "enum": [
+        "True",
+        "False"
+      ],
       "default": "False"
     },
     "Related_Case_Studies": {
-      "collection": "case-study",
-      "attribute": "case-study",
-      "column": "id",
-      "isVirtual": true
+      "collection": "case-study"
+    },
+    "Cover_Image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "Summary": {
+      "type": "text"
+    },
+    "Hero_Image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "Stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.stats",
+      "max": 3
+    },
+    "Quote": {
+      "type": "component",
+      "repeatable": false,
+      "component": "case-study.quote"
+    },
+    "Approach": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.approach-section"
+    },
+    "Key_Outcome": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.outcome",
+      "max": 6
+    },
+    "staff_profiles": {
+      "collection": "staff-profile",
+      "via": "case_study"
+    },
+    "case_studies": {
+      "collection": "case-study"
+    },
+    "Challenge_Goal": {
+      "type": "component",
+      "repeatable": false,
+      "component": "case-study.challenge"
+    },
+    "Expertise": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.expertise",
+      "max": 13
+    },
+    "Tools_Technologies": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.tools-technologies",
+      "max": 13
+    },
+    "Sort_Order": {
+      "type": "biginteger",
+      "default": "1",
+      "max": "10",
+      "min": "1"
+    },
+    "Service_Category": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.service-categories"
     }
   }
 }
