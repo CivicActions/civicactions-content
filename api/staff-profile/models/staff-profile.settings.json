@@ -73,8 +73,13 @@
       "type": "richtext"
     },
     "case_study": {
-      "via": "staff_profiles",
-      "model": "case-study"
+      "model": "case-study",
+      "via": "staff_profiles"
+    },
+    "Category": {
+      "type": "component",
+      "repeatable": true,
+      "component": "staff-profile.category"
     }
   }
 }
