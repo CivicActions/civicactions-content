@@ -16,7 +16,7 @@
       "type": "richtext"
     },
     "Image": {
-      "model": "file",
+      "collection": "file",
       "via": "related",
       "allowedTypes": [
         "images"
