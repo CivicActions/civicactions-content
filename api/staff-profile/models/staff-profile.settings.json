@@ -28,7 +28,7 @@
       "default": "example/example"
     },
     "Image": {
-      "collection": "file",
+      "model": "file",
       "via": "related",
       "allowedTypes": [
         "images"
