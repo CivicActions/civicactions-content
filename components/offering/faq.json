@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_offering_faqs",
+  "info": {
+    "name": "FAQ",
+    "icon": "exchange-alt"
+  },
+  "options": {},
+  "attributes": {
+    "list_questions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "offering.faq-item"
+    }
+  }
+}
