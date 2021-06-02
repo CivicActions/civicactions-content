@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_offering_ctas",
+  "info": {
+    "name": "CTA",
+    "icon": "archive"
+  },
+  "options": {},
+  "attributes": {
+    "Header": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    },
+    "cta_button": {
+      "type": "component",
+      "repeatable": true,
+      "component": "offering.hero-button"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "offerings",
+  "info": {
+    "name": "Offering",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Summary": {
+      "type": "text"
+    },
+    "hero_button": {
+      "type": "component",
+      "repeatable": true,
+      "component": "offering.hero-button"
+    },
+    "client_logo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "offering.client-logo-section"
+    },
+    "Stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.stats"
+    },
+    "value_prop": {
+      "type": "component",
+      "repeatable": false,
+      "component": "offering.value-prop-section"
+    },
+    "tabs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "offering.tabs-sections"
+    },
+    "Quote": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.quote"
+    },
+    "text_section": {
+      "type": "component",
+      "repeatable": false,
+      "component": "offering.text-section"
+    },
+    "FAQ_Accordion_Section": {
+      "type": "component",
+      "repeatable": false,
+      "component": "offering.faq"
+    },
+    "CTA": {
+      "type": "component",
+      "repeatable": false,
+      "component": "offering.cta"
+    },
+    "staff_profiles": {
+      "collection": "staff-profile",
+      "via": "offering"
+    }
+  }
+}

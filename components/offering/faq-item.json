@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_offering_faq_items",
+  "info": {
+    "name": "faq_item",
+    "icon": "angle-double-right"
+  },
+  "options": {},
+  "attributes": {
+    "question": {
+      "type": "text"
+    },
+    "body": {
+      "type": "richtext"
+    }
+  }
+}

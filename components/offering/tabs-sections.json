@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_offering_tabs_sections",
+  "info": {
+    "name": "Tabs Sections",
+    "icon": "columns"
+  },
+  "options": {},
+  "attributes": {
+    "tab_header": {
+      "type": "string"
+    },
+    "tabs_section": {
+      "type": "component",
+      "repeatable": true,
+      "component": "offering.tabs-section",
+      "max": 5
+    },
+    "cta_tab": {
+      "type": "component",
+      "repeatable": false,
+      "component": "offering.cta-tab"
+    }
+  }
+}

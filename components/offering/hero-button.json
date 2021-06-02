@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_offering_hero_buttons",
+  "info": {
+    "name": "Hero button",
+    "icon": "arrow-alt-circle-right"
+  },
+  "options": {},
+  "attributes": {
+    "button_text": {
+      "type": "string"
+    },
+    "button_link": {
+      "type": "string"
+    }
+  }
+}
