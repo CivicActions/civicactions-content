@@ -12,7 +12,8 @@
   },
   "attributes": {
     "Title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "hero_button": {
       "type": "component",
@@ -67,7 +68,13 @@
       "type": "richtext"
     },
     "Path": {
-      "type": "string"
+      "type": "string",
+      "required": true
+    },
+    "team_members": {
+      "type": "component",
+      "repeatable": true,
+      "component": "offering.team-members"
     }
   }
 }
