@@ -2,15 +2,13 @@
   "collectionName": "components_offering_value_prop_sections",
   "info": {
     "name": "Value Prop Section",
-    "icon": "atlas"
+    "icon": "atlas",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "header_text": {
       "type": "string"
-    },
-    "body_text": {
-      "type": "text"
     },
     "image": {
       "collection": "file",
@@ -22,6 +20,9 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "text": {
+      "type": "richtext"
     }
   }
 }

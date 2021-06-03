@@ -2,20 +2,21 @@
   "collectionName": "components_offering_text_sections",
   "info": {
     "name": "Text Section",
-    "icon": "align-right"
+    "icon": "align-right",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "Header": {
       "type": "string"
     },
-    "body": {
-      "type": "string"
-    },
     "button": {
       "type": "component",
       "repeatable": true,
       "component": "offering.hero-button"
+    },
+    "body": {
+      "type": "richtext"
     }
   }
 }
