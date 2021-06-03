@@ -14,9 +14,6 @@
     "Title": {
       "type": "string"
     },
-    "Summary": {
-      "type": "text"
-    },
     "hero_button": {
       "type": "component",
       "repeatable": true,
@@ -65,6 +62,9 @@
     "staff_profiles": {
       "collection": "staff-profile",
       "via": "offering"
+    },
+    "Body": {
+      "type": "richtext"
     }
   }
 }

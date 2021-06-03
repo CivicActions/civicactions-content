@@ -2,7 +2,8 @@
   "collectionName": "components_offering_tabs_sections",
   "info": {
     "name": "tabs_section",
-    "icon": "atom"
+    "icon": "atom",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -10,7 +11,7 @@
       "type": "string"
     },
     "body": {
-      "type": "text"
+      "type": "richtext"
     }
   }
 }
