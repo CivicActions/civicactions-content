@@ -80,10 +80,6 @@
       "type": "component",
       "repeatable": true,
       "component": "staff-profile.category"
-    },
-    "offering": {
-      "via": "staff_profiles",
-      "model": "offering"
     }
   }
 }

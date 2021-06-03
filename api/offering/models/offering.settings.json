@@ -60,10 +60,6 @@
       "repeatable": false,
       "component": "offering.cta"
     },
-    "staff_profiles": {
-      "collection": "staff-profile",
-      "via": "offering"
-    },
     "Body": {
       "type": "richtext"
     },
