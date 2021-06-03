@@ -83,9 +83,6 @@
       "collection": "staff-profile",
       "via": "case_study"
     },
-    "case_studies": {
-      "collection": "case-study"
-    },
     "Challenge_Goal": {
       "type": "component",
       "repeatable": false,
