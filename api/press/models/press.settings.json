@@ -1,20 +1,44 @@
 {
-  "uid": "application::press.press",
-  "collectionName": "presses",
   "kind": "collectionType",
-  "info": { "name": "Press Article", "description": "" },
+  "collectionName": "presses",
+  "info": {
+    "name": "Press Article",
+    "description": ""
+  },
   "options": {
     "increments": true,
-    "timestamps": ["created_at", "updated_at"],
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
     "draftAndPublish": true
   },
   "attributes": {
-    "Title": { "type": "string" },
-    "Body": { "type": "richtext" },
-    "Link": { "type": "string" },
-    "Link_Text": { "type": "string" },
-    "Date": { "type": "date" },
-    "Path": { "type": "string" },
-    "Publication": { "type": "string" }
+    "Title": {
+      "type": "string"
+    },
+    "Body": {
+      "type": "richtext"
+    },
+    "Link": {
+      "type": "string"
+    },
+    "Link_Text": {
+      "type": "string"
+    },
+    "Date": {
+      "type": "date"
+    },
+    "Path": {
+      "type": "string"
+    },
+    "Publication": {
+      "type": "string"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.seo"
+    }
   }
 }

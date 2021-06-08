@@ -110,6 +110,11 @@
       "type": "component",
       "repeatable": true,
       "component": "case-study.service-categories"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.seo"
     }
   }
 }
