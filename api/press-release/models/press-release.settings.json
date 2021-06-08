@@ -1,20 +1,44 @@
 {
-  "uid": "application::press-release.press-release",
-  "collectionName": "press_releases",
   "kind": "collectionType",
-  "info": { "name": "Press Release", "description": "" },
+  "collectionName": "press_releases",
+  "info": {
+    "name": "Press Release",
+    "description": ""
+  },
   "options": {
     "increments": true,
-    "timestamps": ["created_at", "updated_at"],
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
     "draftAndPublish": true
   },
   "attributes": {
-    "Title": { "type": "string" },
-    "Path": { "type": "string" },
-    "Body": { "type": "richtext" },
-    "Date": { "type": "date" },
-    "Link": { "type": "string" },
-    "Link_Text": { "type": "string" },
-    "Publication": { "type": "string" }
+    "Title": {
+      "type": "string"
+    },
+    "Path": {
+      "type": "string"
+    },
+    "Body": {
+      "type": "richtext"
+    },
+    "Date": {
+      "type": "date"
+    },
+    "Link": {
+      "type": "string"
+    },
+    "Link_Text": {
+      "type": "string"
+    },
+    "Publication": {
+      "type": "string"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.seo"
+    }
   }
 }

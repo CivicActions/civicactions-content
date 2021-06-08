@@ -71,6 +71,11 @@
       "type": "component",
       "repeatable": true,
       "component": "offering.team-members"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.seo"
     }
   }
 }
