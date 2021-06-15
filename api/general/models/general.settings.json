@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "generals",
+  "info": {
+    "name": "General"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Path": {
+      "type": "string"
+    },
+    "Hero_text": {
+      "type": "text"
+    },
+    "Body": {
+      "type": "richtext"
+    }
+  }
+}
