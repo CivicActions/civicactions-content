@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "generals",
   "info": {
-    "name": "General"
+    "name": "General",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -21,6 +22,11 @@
     },
     "Body": {
       "type": "richtext"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": true,
+      "component": "seo.seo"
     }
   }
 }
