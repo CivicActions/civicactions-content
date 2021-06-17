@@ -17,9 +17,19 @@ module.exports = {
 
   afterUpdate: async (entry) => {
     console.log('afterUpdate');
+    axios.post(strapi.config.currentEnvironment.staticWebsiteBuildURL, entry)
+      .catch(() => {
+          // Ignore
+        }
+      );
   },
 
   afterDestroy: async (entry) => {
     console.log('afterDestroy');
+    axios.post(strapi.config.currentEnvironment.staticWebsiteBuildURL, entry)
+      .catch(() => {
+          // Ignore
+        }
+      );
   }
 };
