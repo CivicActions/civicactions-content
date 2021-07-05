@@ -41,3 +41,8 @@ spec:
                 secretKeyRef:
                   name: civicactions-content
                   key: MAILGUN_API_KEY
+            - name: STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN
