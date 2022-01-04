@@ -10,6 +10,8 @@ spec:
         - name: regcred
       containers:
         - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
+          ports:
+            - containerPort: 8080
           env:
             - name: DATABASE_HOST
               valueFrom:
