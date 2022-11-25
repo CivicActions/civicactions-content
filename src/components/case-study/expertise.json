@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_case_study_expertise",
+  "info": {
+    "icon": "archway",
+    "description": "",
+    "displayName": "Expertise"
+  },
+  "options": {},
+  "attributes": {
+    "Expertise_Content": {
+      "type": "richtext"
+    }
+  }
+}

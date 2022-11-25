@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_case_study_tools_technologies",
+  "info": {
+    "icon": "briefcase",
+    "description": "",
+    "displayName": "Tools_Technologies"
+  },
+  "options": {},
+  "attributes": {
+    "Tools_Technologies_Content": {
+      "type": "richtext"
+    }
+  }
+}

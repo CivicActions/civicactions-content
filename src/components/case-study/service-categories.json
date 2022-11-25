@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_case_study_service_categories",
+  "info": {
+    "icon": "clipboard-list",
+    "displayName": "Service_Categories"
+  },
+  "options": {},
+  "attributes": {
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        "Web_CMS",
+        "IT_Service_Modernization",
+        "Product_Design",
+        "Security_Compliance",
+        "Data_Services",
+        "Workforce_Development"
+      ]
+    }
+  }
+}

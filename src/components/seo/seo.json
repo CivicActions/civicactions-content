@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_seo_seos",
+  "info": {
+    "icon": "expand",
+    "description": "",
+    "displayName": "SEO"
+  },
+  "options": {},
+  "attributes": {
+    "OGTitle": {
+      "type": "string"
+    },
+    "OGDescription": {
+      "type": "text"
+    },
+    "OGImage": {
+      "type": "media",
+      "allowedTypes": [
+        "images"
+      ],
+      "multiple": false,
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "uid": "staff-profile.social",
+  "collectionName": "components_staff_profile_socials",
+  "info": {
+    "icon": "ad",
+    "displayName": "Social"
+  },
+  "options": {
+    "timestamps": false
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Url": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_offering_client_logo_sections",
+  "info": {
+    "icon": "apple-alt",
+    "displayName": "Client Logo Section"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "client_logo": {
+      "type": "media",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "multiple": true,
+      "required": false
+    }
+  }
+}

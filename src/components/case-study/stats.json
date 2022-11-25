@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_case_study_stats",
+  "info": {
+    "icon": "bezier-curve",
+    "displayName": "Stats"
+  },
+  "options": {},
+  "attributes": {
+    "Numerical_Element": {
+      "type": "string"
+    },
+    "Content_Element": {
+      "type": "string"
+    }
+  }
+}

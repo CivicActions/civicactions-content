@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "press_releases",
+  "info": {
+    "singularName": "press-release",
+    "pluralName": "press-releases",
+    "displayName": "Press-release",
+    "name": "press-release"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Path": {
+      "type": "string"
+    },
+    "Body": {
+      "type": "richtext"
+    },
+    "Date": {
+      "type": "date"
+    },
+    "Link": {
+      "type": "string"
+    },
+    "Link_Text": {
+      "type": "string"
+    },
+    "Publication": {
+      "type": "string"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.seo"
+    }
+  }
+}

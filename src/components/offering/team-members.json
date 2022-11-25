@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_offering_team_members",
+  "info": {
+    "icon": "hands-helping",
+    "description": "",
+    "displayName": "Team Members"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Role": {
+      "type": "string"
+    },
+    "Linkedin": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "allowedTypes": [
+        "images"
+      ],
+      "multiple": true,
+      "required": false
+    },
+    "Body": {
+      "type": "richtext"
+    }
+  }
+}

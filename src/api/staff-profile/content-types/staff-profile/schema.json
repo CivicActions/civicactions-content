@@ -1,0 +1,92 @@
+{
+  "kind": "collectionType",
+  "collectionName": "staff_profiles",
+  "info": {
+    "singularName": "staff-profile",
+    "pluralName": "staff-profiles",
+    "displayName": "Staff-profile",
+    "name": "staff-profile"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Path": {
+      "type": "string",
+      "unique": true,
+      "default": "/team/example-name",
+      "required": true
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Personal_Pronouns": {
+      "type": "string",
+      "default": "example/example"
+    },
+    "Image": {
+      "type": "media",
+      "allowedTypes": [
+        "images"
+      ],
+      "multiple": false,
+      "required": false
+    },
+    "Audio": {
+      "type": "media",
+      "allowedTypes": [
+        "files"
+      ],
+      "multiple": false,
+      "required": false
+    },
+    "Pronunciation": {
+      "type": "string"
+    },
+    "Role": {
+      "type": "string"
+    },
+    "Location": {
+      "type": "string",
+      "default": "City, Full State or Province Name"
+    },
+    "Quote": {
+      "type": "text"
+    },
+    "Social": {
+      "type": "component",
+      "repeatable": true,
+      "component": "staff-profile.social"
+    },
+    "Specialty": {
+      "type": "component",
+      "repeatable": true,
+      "component": "staff-profile.specialty",
+      "max": 4
+    },
+    "Body": {
+      "type": "richtext"
+    },
+    "case_study": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::case-study.case-study",
+      "inversedBy": "staff_profiles"
+    },
+    "Category": {
+      "type": "component",
+      "repeatable": true,
+      "component": "staff-profile.category"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.seo"
+    }
+  }
+}

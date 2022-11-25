@@ -1,0 +1,22 @@
+{
+  "uid": "case-study.background",
+  "collectionName": "components_case_study_backgrounds",
+  "info": {
+    "icon": "allergies",
+    "displayName": "Background"
+  },
+  "options": {
+    "timestamps": false
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Section_One": {
+      "type": "richtext"
+    },
+    "Section_Two": {
+      "type": "richtext"
+    }
+  }
+}

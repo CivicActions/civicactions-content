@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_offering_value_prop_sections",
+  "info": {
+    "icon": "atlas",
+    "description": "",
+    "displayName": "Value Prop Section"
+  },
+  "options": {},
+  "attributes": {
+    "header_text": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "multiple": true,
+      "required": false
+    },
+    "text": {
+      "type": "richtext"
+    }
+  }
+}

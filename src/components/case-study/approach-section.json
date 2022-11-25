@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_case_study_approach_sections",
+  "info": {
+    "icon": "align-justify",
+    "description": "",
+    "displayName": "Approach_Section"
+  },
+  "options": {
+    "timestamps": false
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Text": {
+      "type": "richtext"
+    },
+    "Image": {
+      "type": "media",
+      "allowedTypes": [
+        "images"
+      ],
+      "multiple": false,
+      "required": false
+    }
+  }
+}
