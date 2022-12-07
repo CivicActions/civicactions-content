@@ -5,14 +5,18 @@ metadata:
 build:
   artifacts:
   - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
-    docker:
+    kaniko:
       dockerfile: Dockerfile.prod
-  kaniko:
+      cache:
+        repo: gcr.io/ca-it-prod-shared-5a2c/civicactions-content-cache
+  cluster:
     namespace: civicactions-content
     pullSecretMountPath: /secret
     pullSecretPath: kaniko-secret
-    cache:
-      repo: gcr.io/ca-it-prod-shared-5a2c/civicactions-content-cache
+    pullSecretName: kaniko-secret
+    concurrency: 0
+    randomDockerConfigSecret: false
+    randomPullSecret: false
 manifests:
   rawYaml:
   - k8s/civicactions-content.yaml
