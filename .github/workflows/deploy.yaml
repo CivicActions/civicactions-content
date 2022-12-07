@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - main
+      - update2.0
 jobs:
   deploy:
     runs-on: self-hosted
@@ -46,6 +47,8 @@ jobs:
           --from-literal=ADMIN_JWT_SECRET='${{ secrets. ADMIN_JWT_SECRET}}' \
           --from-literal=DATABASE_HOST='${{ secrets.DATABASE_HOST }}' \
           --from-literal=DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}' \
+          --from-literal=APP_KEYS='${{ secrets.APP_KEYS }}' \
+          --from-literal=API_TOKEN_SALT='${{ secrets.API_TOKEN_SALT }}' \
           --from-literal=MAILGUN_API_KEY='${{ secrets.MAILGUN_API_KEY }}' \
           --from-literal=STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN='${{ secrets.STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -
