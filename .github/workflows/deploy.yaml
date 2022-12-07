@@ -7,8 +7,8 @@ jobs:
   deploy:
     runs-on: self-hosted
     env:
-      SKAFFOLD_VERSION: v1.22.0
-      SKAFFOLD_HASH: 9bd85d4b31eeaea9e12d2f4f5128bfce8834a0fe7969101cbe994c04141af621
+      SKAFFOLD_VERSION: v2.0.3
+      SKAFFOLD_HASH: 7d544461d53d541a6c1e6ba721a8e9f502d6cb240453faf31513f9e4d9b157c1
     steps:
       - uses: actions/checkout@v1
       - uses: azure/setup-kubectl@v1
