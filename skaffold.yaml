@@ -1,17 +1,20 @@
-apiVersion: skaffold/v2beta11
+apiVersion: skaffold/v3
 kind: Config
 metadata:
   name: civicactions-content
 build:
-  cluster:
+  artifacts:
+  - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
+    docker:
+      dockerfile: Dockerfile.prod
+  kaniko:
     namespace: civicactions-content
-    pullSecretPath: kaniko-secret
     pullSecretMountPath: /secret
+    pullSecretPath: kaniko-secret
     cache:
       repo: gcr.io/ca-it-prod-shared-5a2c/civicactions-content-cache
-  artifacts:
-    - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
+manifests:
+  rawYaml:
+  - k8s/civicactions-content.yaml
 deploy:
-  kubectl:
-    manifests:
-    - k8s/civicactions-content.yaml
+  kubectl: {}
