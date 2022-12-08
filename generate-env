@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+cat >.env <<EOL
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_NAME=strapi
+DATABASE_USERNAME=strapi
+DATABASE_PASSWORD=strapi
+NODE_ENV=development
+DATABASE_CLIENT=postgresJWT_SECRET=$(openssl rand -base64 21)
+JWT_SECRET=$(openssl rand -base64 21)
+ADMIN_JWT_SECRET=$(openssl rand -base64 21)
+APP_KEYS=$(openssl rand -hex 40),$(openssl rand -hex 40)
+API_TOKEN_SALT=$(openssl rand -hex 40)
+EOL
+
+echo ".env file created"
