@@ -1,17 +1,19 @@
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: v4
+  name: v3-v4
   namespace: civicactions-content
 spec:
+  backoffLimit: 0
   template:
     spec:
+      restartPolicy: Never
       imagePullSecrets:
         - name: regcred
       containers:
-        - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
-          ports:
-            - containerPort: 8080
+        - name: upgrade
+          image: gcr.io/ca-it-prod-shared-5a2c/v3-v4
+          command: ["/opt/app/reset-schema.sh"]
           env:
             - name: DATABASE_HOST
               valueFrom:

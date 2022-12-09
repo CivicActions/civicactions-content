@@ -1,0 +1,24 @@
+apiVersion: skaffold/v3
+kind: Config
+metadata:
+  name: v3-v4
+build:
+  artifacts:
+  - image: gcr.io/ca-it-prod-shared-5a2c/v3-v4
+    kaniko:
+      dockerfile: Dockerfile.prod
+      cache:
+        repo: gcr.io/ca-it-prod-shared-5a2c/civicactions-content-cache
+  cluster:
+    namespace: civicactions-content
+    pullSecretMountPath: /secret
+    pullSecretPath: kaniko-secret
+    pullSecretName: kaniko-secret
+    concurrency: 0
+    randomDockerConfigSecret: false
+    randomPullSecret: false
+manifests:
+  rawYaml:
+  - k8s-reset-schema.yaml
+deploy:
+  kubectl: {}

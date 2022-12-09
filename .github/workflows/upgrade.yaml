@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - update2.0
 jobs:
   deploy:
     runs-on: self-hosted
@@ -40,7 +40,6 @@ jobs:
             exit 1; \
           fi
       - name: Add secrets
-        # Note that USER_JWT_SECRET can be removed when v4 is live
         run: |
           kubectl --dry-run=client -o yaml --namespace civicactions-content create secret generic civicactions-content \
           --from-literal=JWT_SECRET='${{ secrets.JWT_SECRET }}' \
@@ -53,5 +52,25 @@ jobs:
           --from-literal=MAILGUN_API_KEY='${{ secrets.MAILGUN_API_KEY }}' \
           --from-literal=STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN='${{ secrets.STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -
-      - name: Run Skaffold
-        run: skaffold run
+      - name: Stop Strapi.
+        run: |
+          skaffold delete
+          sleep 10
+      - name: Reset schema.
+        run: |
+          skaffold run --force=true -f skaffold-reset-schema.yaml
+          kubectl -n civicactions-content wait --timeout=600 --for=condition=Complete job/v3-v4
+          skaffold delete -f skaffold-reset-schema.yaml
+        working-directory: v3-sql-v4-sql
+      - name: Install Strapi schema.
+        run: |
+          skaffold run
+          sleep 60
+          skaffold delete
+          sleep 60
+      - name: Migrate schema.
+        run: |
+          skaffold run --force=true -f skaffold-migrate-schema.yaml
+          kubectl -n civicactions-content wait --timeout=1200 --for=condition=Complete job/v3-v4
+          skaffold delete -f skaffold-migrate-schema.yaml
+        working-directory: v3-sql-v4-sql
