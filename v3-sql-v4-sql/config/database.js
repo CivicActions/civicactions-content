@@ -9,7 +9,7 @@ additionalConfigV3 = {
     port: 5432,
     user: 'strapi',
     password: process.env.DATABASE_PASSWORD,
-    database: 'strapi',
+    database: 'strapi3',
   },
 };
 
