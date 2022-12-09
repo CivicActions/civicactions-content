@@ -60,6 +60,7 @@ jobs:
         run: |
           skaffold run --force=true -f skaffold-reset-schema.yaml
           kubectl -n civicactions-content wait --timeout=600 --for=condition=Complete job/v3-v4
+          kubectl -n civicactions-content logs "$(kubectl -n civicactions-content get pod --selector=job-name=v3-v4 -o 'jsonpath={.items[-1].metadata.name}')"
           skaffold delete -f skaffold-reset-schema.yaml
         working-directory: v3-sql-v4-sql
       - name: Install Strapi schema.
@@ -72,5 +73,8 @@ jobs:
         run: |
           skaffold run --force=true -f skaffold-migrate-schema.yaml
           kubectl -n civicactions-content wait --timeout=1200 --for=condition=Complete job/v3-v4
+          kubectl -n civicactions-content logs "$(kubectl -n civicactions-content get pod --selector=job-name=v3-v4 -o 'jsonpath={.items[-1].metadata.name}')"
           skaffold delete -f skaffold-migrate-schema.yaml
         working-directory: v3-sql-v4-sql
+      - name: Start Strapi with Skaffold
+        run: skaffold run
