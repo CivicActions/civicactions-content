@@ -6,7 +6,8 @@ psql -h "${DATABASE_HOST}" -U strapi -d strapi4 -c 'CREATE SCHEMA public;'
 
 # Clone the v3 site to a new database, so we can wrangle some issues.
 psql -h "${DATABASE_HOST}" -U strapi -d strapi -c 'DROP DATABASE IF EXISTS strapi3;'
-psql -h "${DATABASE_HOST}" -U strapi -d strapi -c 'CREATE DATABASE strapi3 WITH TEMPLATE strapi OWNER strapi;'
+psql -h "${DATABASE_HOST}" -U strapi -d strapi -c 'CREATE DATABASE strapi3;'
+pg_dump -h "${DATABASE_HOST}" -U strapi -d strapi | psql -h "${DATABASE_HOST}" -U strapi -d strapi3
 
 # Wrangle schema issues
 
