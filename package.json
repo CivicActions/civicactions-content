@@ -11,12 +11,12 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "@strapi-community/strapi-provider-upload-google-cloud-storage": "^4.3.6",
     "@strapi/plugin-i18n": "4.5.3",
     "@strapi/plugin-users-permissions": "4.5.3",
     "@strapi/provider-email-mailgun": "4.5.2",
     "@strapi/strapi": "4.5.3",
-    "pg": "^8.8.0",
-    "strapi-provider-upload-google-cloud-storage": "^3.6.8"
+    "pg": "^8.8.0"
   },
   "author": {
     "name": "CivicActions developers"
