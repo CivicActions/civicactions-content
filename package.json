@@ -22,7 +22,8 @@
     "name": "CivicActions developers"
   },
   "strapi": {
-    "uuid": "11b68d12-e75c-4c73-8173-0e9e518bd9d0"
+    "uuid": "11b68d12-e75c-4c73-8173-0e9e518bd9d0",
+    "telemetryDisabled": true
   },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
