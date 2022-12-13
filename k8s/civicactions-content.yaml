@@ -23,6 +23,16 @@ spec:
                 secretKeyRef:
                   name: civicactions-content
                   key: DATABASE_PASSWORD
+            - name: DATABASE_DEBUG
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: DATABASE_DEBUG
+            - name: STRAPI_LOG_LEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: STRAPI_LOG_LEVEL
             - name: GCS_SERVICE_ACCOUNT
               valueFrom:
                 secretKeyRef:

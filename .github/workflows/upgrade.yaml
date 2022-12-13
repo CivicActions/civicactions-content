@@ -47,6 +47,8 @@ jobs:
           --from-literal=ADMIN_JWT_SECRET='${{ secrets. ADMIN_JWT_SECRET}}' \
           --from-literal=DATABASE_HOST='${{ secrets.DATABASE_HOST }}' \
           --from-literal=DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}' \
+          --from-literal=DATABASE_DEBUG='${{ secrets.DATABASE_DEBUG }}' \
+          --from-literal=STRAPI_LOG_LEVEL='${{ secrets.STRAPI_LOG_LEVEL }}' \
           --from-literal=APP_KEYS='${{ secrets.APP_KEYS }}' \
           --from-literal=API_TOKEN_SALT='${{ secrets.API_TOKEN_SALT }}' \
           --from-literal=MAILGUN_API_KEY='${{ secrets.MAILGUN_API_KEY }}' \
