@@ -13,7 +13,7 @@ spec:
       containers:
         - name: upgrade
           image: gcr.io/ca-it-prod-shared-5a2c/v3-v4
-          command: ["yarn", "start"]
+          command: ["/opt/app/migrate-schema.sh"]
           env:
             - name: DATABASE_HOST
               valueFrom:
