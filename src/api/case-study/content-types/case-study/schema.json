@@ -24,7 +24,7 @@
     },
     "Path": {
       "type": "string",
-      "default": "/case-study/example-name",
+      "default": "/case-studies/example-name",
       "unique": true
     },
     "Promoted_to_Homepage": {
