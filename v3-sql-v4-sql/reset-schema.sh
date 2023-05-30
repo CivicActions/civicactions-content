@@ -13,3 +13,5 @@ pg_dump -h "${DATABASE_HOST}" -U strapi -d strapi | psql -h "${DATABASE_HOST}" -
 
 # https://github.com/strapi/migration-scripts/issues/19
 psql -h "${DATABASE_HOST}" -U strapi -d strapi3 -c 'ALTER TABLE strapi_permission DROP COLUMN fields;'
+
+echo "Reset complete"

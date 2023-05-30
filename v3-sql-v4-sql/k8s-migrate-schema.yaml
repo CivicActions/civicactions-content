@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: v3-v4
+  name: v3-v4-migrate
   namespace: civicactions-content
 spec:
   backoffLimit: 0

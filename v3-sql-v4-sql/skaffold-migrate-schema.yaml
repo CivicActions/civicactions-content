@@ -15,6 +15,7 @@ build:
     pullSecretPath: kaniko-secret
     pullSecretName: kaniko-secret
     concurrency: 0
+    timeout: 60m
     randomDockerConfigSecret: false
     randomPullSecret: false
 manifests:

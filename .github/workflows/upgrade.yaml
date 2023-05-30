@@ -60,10 +60,10 @@ jobs:
           sleep 10
       - name: Reset schema.
         run: |
-          skaffold run --force=true -f skaffold-reset-schema.yaml
-          kubectl -n civicactions-content wait --timeout=10m --for=condition=Complete job/v3-v4
-          kubectl -n civicactions-content logs "$(kubectl -n civicactions-content get pod --selector=job-name=v3-v4 -o 'jsonpath={.items[-1].metadata.name}')"
           skaffold delete -f skaffold-reset-schema.yaml
+          skaffold run --force=true -f skaffold-reset-schema.yaml
+          kubectl -n civicactions-content wait --timeout=10m --for=condition=Complete job/v3-v4-reset
+          kubectl -n civicactions-content logs "$(kubectl -n civicactions-content get pod --selector=job-name=v3-v4-reset -o 'jsonpath={.items[-1].metadata.name}')"
         working-directory: v3-sql-v4-sql
       - name: Install Strapi schema.
         run: |
@@ -73,10 +73,10 @@ jobs:
           sleep 60
       - name: Migrate schema.
         run: |
-          skaffold run --force=true -f skaffold-migrate-schema.yaml
-          kubectl -n civicactions-content wait --timeout=20m --for=condition=Complete job/v3-v4
-          kubectl -n civicactions-content logs "$(kubectl -n civicactions-content get pod --selector=job-name=v3-v4 -o 'jsonpath={.items[-1].metadata.name}')"
           skaffold delete -f skaffold-migrate-schema.yaml
+          skaffold run --force=true -f skaffold-migrate-schema.yaml
+          kubectl -n civicactions-content wait --timeout=20m --for=condition=Complete job/v3-v4-migrate
+          kubectl -n civicactions-content logs "$(kubectl -n civicactions-content get pod --selector=job-name=v3-v4-migrate -o 'jsonpath={.items[-1].metadata.name}')"
         working-directory: v3-sql-v4-sql
       - name: Start Strapi with Skaffold
         run: skaffold run
