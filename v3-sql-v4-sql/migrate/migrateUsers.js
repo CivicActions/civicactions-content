@@ -1,15 +1,20 @@
-const { dbV3, dbV4 } = require('../config/database');
+const { dbV3, dbV4, isPGSQL } = require('../config/database');
 const { BATCH_SIZE } = require('./helpers/constants');
 const { migrate, resetTableSequence } = require('./helpers/migrate');
 const { migrateItems, migrateItem } = require('./helpers/migrateFields');
 const { resolveDestTableName, resolveSourceTableName } = require('./helpers/tableNameHelpers');
 const { migrateUserPermissionAction } = require('./helpers/usersHelpers');
+const { processRelation, migrateRelations } = require('./helpers/relationHelpers');
+const { omit } = require('lodash');
 
 const processedTables = [
   'users-permissions_role',
   'users-permissions_permission',
   'users-permissions_user',
 ];
+
+const relations = [];
+const skipAttributes = ['created_by', 'updated_by'];
 
 async function migrateUserPermissions() {
   const source = 'users-permissions_permission';
@@ -29,10 +34,20 @@ async function migrateUserPermissions() {
   await dbV4(resolveDestTableName(destination)).del();
   for (var page = 0; page * BATCH_SIZE < count; page++) {
     console.log(`${source} batch #${page + 1}`);
-    const items = await sourceSelect
-      .clone()
-      .limit(BATCH_SIZE)
-      .offset(page * BATCH_SIZE);
+    let items;
+
+    if (isPGSQL) {
+      items = await sourceSelect
+        .clone()
+        .limit(BATCH_SIZE)
+        .offset(page * BATCH_SIZE)
+        .orderBy('id', 'asc');
+    } else {
+      items = await sourceSelect
+        .clone()
+        .limit(BATCH_SIZE)
+        .offset(page * BATCH_SIZE);
+    }
 
     const migratedItems = migrateItems(
       items,
@@ -56,6 +71,37 @@ async function migrateUsersData() {
   const destination = 'up_users';
   const destinationLinks = 'up_users_role_links';
 
+  const modelsDefs = await dbV3(resolveSourceTableName('core_store')).where(
+    'key',
+    'like',
+    'model_def_plugins::users-permissions.user'
+  );
+
+  const modelDefEntry = modelsDefs[0];
+  const modelDef = JSON.parse(modelDefEntry.value);
+
+  const omitAttributes = [];
+
+  for (const [key, value] of Object.entries(modelDef.attributes)) {
+    if (skipAttributes.includes(key)) {
+      continue;
+    }
+    if (value.model || value.collection) {
+      processRelation(
+        {
+          key,
+          value,
+          collectionName: modelDef.collectionName,
+          uid: modelDef.uid,
+        },
+        relations
+      );
+      omitAttributes.push(key);
+    }
+  }
+
+  await migrateRelations([source], relations);
+
   const count =
     (await dbV3(resolveSourceTableName(source)).count().first()).count ||
     (await dbV3(resolveSourceTableName(source)).clone().count().first())['count(*)'];
@@ -64,10 +110,22 @@ async function migrateUsersData() {
   await dbV4(resolveDestTableName(destination)).del();
   for (var page = 0; page * BATCH_SIZE < count; page++) {
     console.log(`${source} batch #${page + 1}`);
-    const items = await dbV3(resolveSourceTableName(source))
-      .limit(BATCH_SIZE)
-      .offset(page * BATCH_SIZE);
-    const migratedItems = migrateItems(items, ({ role, ...item }) => migrateItem(item));
+    let items;
+
+    if (isPGSQL) {
+      items = await dbV3(resolveSourceTableName(source))
+        .limit(BATCH_SIZE)
+        .offset(page * BATCH_SIZE)
+        .orderBy('id', 'asc');
+    } else {
+      items = await dbV3(resolveSourceTableName(source))
+        .limit(BATCH_SIZE)
+        .offset(page * BATCH_SIZE);
+    }
+
+    const migratedItems = migrateItems(items, ({ role, ...item }) =>
+      migrateItem(omit(item, omitAttributes))
+    );
     const roleLinks = items.map((item) => ({
       user_id: item.id,
       role_id: item.role,
@@ -79,6 +137,11 @@ async function migrateUsersData() {
 }
 
 async function migrateTables() {
+  if (process.env.DISABLE_UP_MIGRATION === 'true') {
+    console.log('UP MIGRATIONS WERE SKIPPED DUE TO DISABLING IT IN CONFIG');
+    return false;
+  }
+
   console.log('Migrating Users');
   await migrate('users-permissions_role', 'up_roles');
   await migrateUserPermissions();
