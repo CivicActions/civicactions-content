@@ -4,11 +4,12 @@ metadata:
   name: v3-v4
 build:
   artifacts:
-  - image: gcr.io/ca-it-prod-shared-5a2c/v3-v4
-    kaniko:
-      dockerfile: Dockerfile.prod
-      cache:
-        repo: gcr.io/ca-it-prod-shared-5a2c/civicactions-content-cache
+    - image: gcr.io/ca-it-prod-shared-5a2c/v3-v4
+      kaniko:
+        dockerfile: Dockerfile.prod
+        cache:
+          repo: gcr.io/ca-it-prod-shared-5a2c/civicactions-content-cache
+        imageFSExtractRetry: "2"
   cluster:
     namespace: civicactions-content
     pullSecretMountPath: /secret
@@ -20,6 +21,6 @@ build:
     randomPullSecret: false
 manifests:
   rawYaml:
-  - k8s-reset-schema.yaml
+    - k8s-reset-schema.yaml
 deploy:
   kubectl: {}
