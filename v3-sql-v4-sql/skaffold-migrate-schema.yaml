@@ -19,6 +19,9 @@ build:
     timeout: 60m
     randomDockerConfigSecret: false
     randomPullSecret: false
+    resources:
+      requests:
+        memory: 2Gi
 manifests:
   rawYaml:
     - k8s-migrate-schema.yaml
