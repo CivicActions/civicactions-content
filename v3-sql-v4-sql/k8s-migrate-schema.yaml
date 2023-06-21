@@ -60,3 +60,8 @@ spec:
                 secretKeyRef:
                   name: civicactions-content
                   key: STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN
+            - name: V4_MIGRATE_API_VALUE
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: V4_MIGRATE_API_VALUE

@@ -53,6 +53,7 @@ jobs:
           --from-literal=API_TOKEN_SALT='${{ secrets.API_TOKEN_SALT }}' \
           --from-literal=MAILGUN_API_KEY='${{ secrets.MAILGUN_API_KEY }}' \
           --from-literal=STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN='${{ secrets.STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN }}' \
+          --from-literal=V4_MIGRATE_API_VALUE='${{ secrets.V4_MIGRATE_API_VALUE }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -
       - name: Stop Strapi.
         run: |
