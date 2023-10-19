@@ -40,11 +40,9 @@ jobs:
             exit 1; \
           fi
       - name: Add secrets
-        # Note that USER_JWT_SECRET can be removed when v4 is live
         run: |
           kubectl --dry-run=client -o yaml --namespace civicactions-content create secret generic civicactions-content \
           --from-literal=JWT_SECRET='${{ secrets.JWT_SECRET }}' \
-          --from-literal=USER_JWT_SECRET='${{ secrets.USER_JWT_SECRET }}' \
           --from-literal=ADMIN_JWT_SECRET='${{ secrets. ADMIN_JWT_SECRET}}' \
           --from-literal=DATABASE_HOST='${{ secrets.DATABASE_HOST }}' \
           --from-literal=DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}' \
