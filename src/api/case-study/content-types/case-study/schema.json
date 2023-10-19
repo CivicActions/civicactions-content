@@ -1,0 +1,124 @@
+{
+  "kind": "collectionType",
+  "collectionName": "case_studies",
+  "info": {
+    "singularName": "case-study",
+    "pluralName": "case-studies",
+    "displayName": "Case-study",
+    "name": "case-study"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Client_Name": {
+      "type": "string"
+    },
+    "Path": {
+      "type": "string",
+      "default": "/case-studies/example-name",
+      "unique": true
+    },
+    "Promoted_to_Homepage": {
+      "type": "enumeration",
+      "enum": [
+        "True",
+        "False"
+      ],
+      "default": "False"
+    },
+    "Related_Case_Studies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::case-study.case-study"
+    },
+    "Cover_Image": {
+      "type": "media",
+      "allowedTypes": [
+        "images"
+      ],
+      "multiple": false,
+      "required": true
+    },
+    "Summary": {
+      "type": "text"
+    },
+    "Hero_Image": {
+      "type": "media",
+      "allowedTypes": [
+        "images"
+      ],
+      "multiple": false,
+      "required": false
+    },
+    "Stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.stats",
+      "max": 3
+    },
+    "Quote": {
+      "type": "component",
+      "repeatable": false,
+      "component": "case-study.quote"
+    },
+    "Approach": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.approach-section"
+    },
+    "Key_Outcome": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.outcome",
+      "max": 6
+    },
+    "staff_profiles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::staff-profile.staff-profile",
+      "mappedBy": "case_study"
+    },
+    "Challenge_Goal": {
+      "type": "component",
+      "repeatable": false,
+      "component": "case-study.challenge"
+    },
+    "Expertise": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.expertise",
+      "max": 13
+    },
+    "Tools_Technologies": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.tools-technologies",
+      "max": 13
+    },
+    "Sort_Order": {
+      "type": "biginteger",
+      "default": "1",
+      "max": "10",
+      "min": "1"
+    },
+    "Service_Category": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-study.service-categories"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.seo"
+    }
+  }
+}

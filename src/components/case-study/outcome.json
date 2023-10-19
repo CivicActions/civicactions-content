@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_case_study_outcomes",
+  "info": {
+    "icon": "align-left",
+    "description": "",
+    "displayName": "Outcome"
+  },
+  "options": {
+    "timestamps": false
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Text": {
+      "type": "richtext"
+    }
+  }
+}

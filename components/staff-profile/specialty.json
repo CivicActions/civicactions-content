@@ -1,7 +1,0 @@
-{
-  "uid": "staff-profile.specialty",
-  "collectionName": "components_staff_profile_specialties",
-  "info": { "name": "Specialty", "icon": "address-book" },
-  "options": { "timestamps": false },
-  "attributes": { "Specialty": { "type": "string" } }
-}

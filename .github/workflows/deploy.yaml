@@ -6,8 +6,8 @@ jobs:
   deploy:
     runs-on: self-hosted
     env:
-      SKAFFOLD_VERSION: v1.22.0
-      SKAFFOLD_HASH: 9bd85d4b31eeaea9e12d2f4f5128bfce8834a0fe7969101cbe994c04141af621
+      SKAFFOLD_VERSION: v2.0.3
+      SKAFFOLD_HASH: 7d544461d53d541a6c1e6ba721a8e9f502d6cb240453faf31513f9e4d9b157c1
     steps:
       - uses: actions/checkout@v1
       - uses: azure/setup-kubectl@v1
@@ -42,10 +42,14 @@ jobs:
       - name: Add secrets
         run: |
           kubectl --dry-run=client -o yaml --namespace civicactions-content create secret generic civicactions-content \
-          --from-literal=USER_JWT_SECRET='${{ secrets.USER_JWT_SECRET }}' \
+          --from-literal=JWT_SECRET='${{ secrets.JWT_SECRET }}' \
           --from-literal=ADMIN_JWT_SECRET='${{ secrets. ADMIN_JWT_SECRET}}' \
           --from-literal=DATABASE_HOST='${{ secrets.DATABASE_HOST }}' \
           --from-literal=DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}' \
+          --from-literal=DATABASE_DEBUG='${{ secrets.DATABASE_DEBUG }}' \
+          --from-literal=STRAPI_LOG_LEVEL='${{ secrets.STRAPI_LOG_LEVEL }}' \
+          --from-literal=APP_KEYS='${{ secrets.APP_KEYS }}' \
+          --from-literal=API_TOKEN_SALT='${{ secrets.API_TOKEN_SALT }}' \
           --from-literal=MAILGUN_API_KEY='${{ secrets.MAILGUN_API_KEY }}' \
           --from-literal=STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN='${{ secrets.STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -

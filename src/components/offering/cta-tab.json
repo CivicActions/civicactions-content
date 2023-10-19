@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_offering_cta_tabs",
+  "info": {
+    "icon": "address-card",
+    "displayName": "cta_tab"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "string"
+    },
+    "button_text": {
+      "type": "string"
+    },
+    "button_link": {
+      "type": "string"
+    }
+  }
+}

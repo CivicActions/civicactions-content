@@ -1,17 +1,29 @@
-apiVersion: skaffold/v2beta11
+apiVersion: skaffold/v3
 kind: Config
 metadata:
   name: civicactions-content
 build:
-  cluster:
-    namespace: civicactions-content
-    pullSecretPath: kaniko-secret
-    pullSecretMountPath: /secret
-    cache:
-      repo: gcr.io/ca-it-prod-shared-5a2c/civicactions-content-cache
   artifacts:
     - image: gcr.io/ca-it-prod-shared-5a2c/civicactions-content
-deploy:
-  kubectl:
-    manifests:
+      kaniko:
+        dockerfile: Dockerfile.prod
+        cache:
+          repo: gcr.io/ca-it-prod-shared-5a2c/civicactions-content-cache
+        imageFSExtractRetry: "2"
+  cluster:
+    namespace: civicactions-content
+    pullSecretMountPath: /secret
+    pullSecretPath: kaniko-secret
+    pullSecretName: kaniko-secret
+    concurrency: 0
+    timeout: 60m
+    randomDockerConfigSecret: false
+    randomPullSecret: false
+    resources:
+      requests:
+        memory: 2Gi
+manifests:
+  rawYaml:
     - k8s/civicactions-content.yaml
+deploy:
+  kubectl: {}

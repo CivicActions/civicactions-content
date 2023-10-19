@@ -1,0 +1,20 @@
+{
+  "uid": "case-study.bullet",
+  "collectionName": "components_case_study_bullets",
+  "info": {
+    "icon": "align-center",
+    "description": "",
+    "displayName": "Bullet"
+  },
+  "options": {
+    "timestamps": false
+  },
+  "attributes": {
+    "Text": {
+      "type": "string"
+    },
+    "Url": {
+      "type": "string"
+    }
+  }
+}

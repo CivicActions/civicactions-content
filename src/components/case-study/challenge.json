@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_case_study_challenges",
+  "info": {
+    "icon": "align-center",
+    "description": "",
+    "displayName": "Challenge"
+  },
+  "options": {
+    "timestamps": false
+  },
+  "attributes": {
+    "Challenge": {
+      "type": "richtext"
+    },
+    "Client_Goal": {
+      "type": "richtext"
+    }
+  }
+}

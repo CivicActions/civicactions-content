@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_offering_text_sections",
+  "info": {
+    "icon": "align-right",
+    "description": "",
+    "displayName": "Text Section"
+  },
+  "options": {},
+  "attributes": {
+    "Header": {
+      "type": "string"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": true,
+      "component": "offering.hero-button"
+    },
+    "body": {
+      "type": "richtext"
+    }
+  }
+}

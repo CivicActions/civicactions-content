@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_offering_tabs_section",
+  "info": {
+    "icon": "atom",
+    "description": "",
+    "displayName": "tabs_section"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "string"
+    },
+    "body": {
+      "type": "richtext"
+    }
+  }
+}

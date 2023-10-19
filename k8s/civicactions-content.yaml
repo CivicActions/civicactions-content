@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: civicactions-content
+  name: v4
   namespace: civicactions-content
 spec:
   template:
@@ -23,21 +23,41 @@ spec:
                 secretKeyRef:
                   name: civicactions-content
                   key: DATABASE_PASSWORD
+            - name: DATABASE_DEBUG
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: DATABASE_DEBUG
+            - name: STRAPI_LOG_LEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: STRAPI_LOG_LEVEL
             - name: GCS_SERVICE_ACCOUNT
               valueFrom:
                 secretKeyRef:
                   name: civicactions-content
                   key: GCS_SERVICE_ACCOUNT
-            - name: USER_JWT_SECRET
+            - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: civicactions-content
-                  key: USER_JWT_SECRET
+                  key: JWT_SECRET
             - name: ADMIN_JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: civicactions-content
                   key: ADMIN_JWT_SECRET
+            - name: APP_KEYS
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: APP_KEYS
+            - name: API_TOKEN_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: API_TOKEN_SALT
             - name: MAILGUN_API_KEY
               valueFrom:
                 secretKeyRef:

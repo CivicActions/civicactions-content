@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_staff_profile_categories",
+  "info": {
+    "icon": "bars",
+    "displayName": "Category"
+  },
+  "options": {},
+  "attributes": {
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        "Leadership",
+        "Growth_Strategy",
+        "People_Operations",
+        "Product_Design",
+        "Engineering",
+        "Client_Services"
+      ]
+    }
+  }
+}

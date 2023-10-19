@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_case_study_case_study_quotes",
+  "info": {
+    "icon": "braille",
+    "displayName": "Case_Study_Quote"
+  },
+  "options": {},
+  "attributes": {
+    "Quote_Text": {
+      "type": "text"
+    },
+    "Quote_Attribution": {
+      "type": "string"
+    }
+  }
+}
