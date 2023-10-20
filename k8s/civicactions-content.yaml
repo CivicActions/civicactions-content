@@ -13,6 +13,9 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: URL
+              # This should match https://<name>.<namespace>.app.civicactions.net
+              value: https://v4.civicactions-content.app.civicactions.net
             - name: DATABASE_HOST
               valueFrom:
                 secretKeyRef:
