@@ -50,6 +50,7 @@ jobs:
           --from-literal=STRAPI_LOG_LEVEL='${{ secrets.STRAPI_LOG_LEVEL }}' \
           --from-literal=APP_KEYS='${{ secrets.APP_KEYS }}' \
           --from-literal=API_TOKEN_SALT='${{ secrets.API_TOKEN_SALT }}' \
+          --from-literal=TRANSFER_TOKEN_SALT='${{ secrets.TRANSFER_TOKEN_SALT }}' \
           --from-literal=MAILGUN_API_KEY='${{ secrets.MAILGUN_API_KEY }}' \
           --from-literal=STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN='${{ secrets.STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -

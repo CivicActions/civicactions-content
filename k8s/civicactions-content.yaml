@@ -58,6 +58,11 @@ spec:
                 secretKeyRef:
                   name: civicactions-content
                   key: API_TOKEN_SALT
+            - name: TRANSFER_TOKEN_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: TRANSFER_TOKEN_SALT
             - name: MAILGUN_API_KEY
               valueFrom:
                 secretKeyRef:
