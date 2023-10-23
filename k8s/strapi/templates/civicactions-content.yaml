@@ -1,0 +1,99 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: "{{ .Release.Name }}"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - image: "{{ .Values.image }}"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: URL
+              # This should match https://<name>.<namespace>.app.civicactions.net
+              value: https://{{ .Release.Name }}.{{ .Release.Namespace }}.app.civicactions.net
+            {{- if eq .Values.environment "review" }}
+            - name: DATABASE_USERNAME
+              value: postgres
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Release.Name }}-postgresql"
+                  key: postgres-password
+            - name: DATABASE_HOST
+              value: "{{- printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" -}}"
+            - name: DATABASE_PORT
+              value: "{{ .Values.postgresql.primary.service.ports.postgresql }}"
+            - name: DATABASE_NAME
+              value: "{{ .Values.postgresql.auth.database }}"
+            {{- end }}
+            {{- if eq .Values.environment "production" }}
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: DATABASE_HOST
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: DATABASE_PASSWORD
+            - name: DATABASE_NAME
+              value: {{ .Values.databaseName }}
+            - name: DATABASE_DEBUG
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: DATABASE_DEBUG
+            - name: GCS_BASE_PATH
+              value: {{ .Values.gcsBasePath }}
+            - name: STRAPI_LOG_LEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: STRAPI_LOG_LEVEL
+            - name: GCS_SERVICE_ACCOUNT
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: GCS_SERVICE_ACCOUNT
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: JWT_SECRET
+            - name: ADMIN_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: ADMIN_JWT_SECRET
+            - name: APP_KEYS
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: APP_KEYS
+            - name: API_TOKEN_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: API_TOKEN_SALT
+            - name: TRANSFER_TOKEN_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: TRANSFER_TOKEN_SALT
+            - name: MAILGUN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: MAILGUN_API_KEY
+            - name: STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: civicactions-content
+                  key: STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN
+            {{- end }}
