@@ -7,16 +7,3 @@
 ## Primary production settings
 # databaseName:
 # gcsBasePath:
-
-## This controls a postgres chart, only used for review sites
-postgresql:
-  enabled: false
-  primary:
-    persistence:
-      enabled: false
-  auth:
-    database: strapi
-    enablePostgresUser: true
-## TODO
-# Make salt generate automatically in review envs
-# Add data transfer

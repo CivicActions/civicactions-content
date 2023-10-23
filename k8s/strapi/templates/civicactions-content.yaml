@@ -16,22 +16,6 @@ spec:
             - name: URL
               # This should match https://<name>.<namespace>.app.civicactions.net
               value: https://{{ .Release.Name }}.{{ .Release.Namespace }}.app.civicactions.net
-            {{- if eq .Values.environment "review" }}
-            - name: DATABASE_USERNAME
-              value: postgres
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: "{{ .Release.Name }}-postgresql"
-                  key: postgres-password
-            - name: DATABASE_HOST
-              value: "{{- printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" -}}"
-            - name: DATABASE_PORT
-              value: "{{ .Values.postgresql.primary.service.ports.postgresql }}"
-            - name: DATABASE_NAME
-              value: "{{ .Values.postgresql.auth.database }}"
-            {{- end }}
-            {{- if eq .Values.environment "production" }}
             - name: DATABASE_HOST
               valueFrom:
                 secretKeyRef:
@@ -43,14 +27,14 @@ spec:
                   name: civicactions-content
                   key: DATABASE_PASSWORD
             - name: DATABASE_NAME
-              value: {{ .Values.databaseName }}
+              value: "{{ .Values.databaseName }}"
             - name: DATABASE_DEBUG
               valueFrom:
                 secretKeyRef:
                   name: civicactions-content
                   key: DATABASE_DEBUG
             - name: GCS_BASE_PATH
-              value: {{ .Values.gcsBasePath }}
+              value: "{{ .Values.gcsBasePath }}"
             - name: STRAPI_LOG_LEVEL
               valueFrom:
                 secretKeyRef:
@@ -96,4 +80,3 @@ spec:
                 secretKeyRef:
                   name: civicactions-content
                   key: STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN
-            {{- end }}

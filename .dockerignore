@@ -106,14 +106,37 @@ coverage
 # Strapi
 ############################
 
-.env
-license.txt
-exports
+# Exclude version control files and folders
+.git*
+*.log
+
+# Exclude cache directories and common patterns
 *.cache
-.strapi-updater.json
-data
-.tmp/
-.cache/
-.git/
-build/
 node_modules/
+.tmp/
+
+# Exclude editor and config files
+.editor*
+.eslint*
+.strapi-updater.json
+
+# Exclude Docker and Kubernetes related files
+*.yml
+*.yaml
+Dockerfile*
+.dockerignore
+k8s/
+*.kpt-pipeline
+
+# Exclude environment configurations
+*.env*
+
+# Exclude misc and test files/folders
+generate-env
+test
+*.md
+*.txt
+.env
+exports
+data
+build

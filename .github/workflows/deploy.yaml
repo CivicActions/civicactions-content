@@ -2,6 +2,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - v*
 jobs:
   deploy:
     runs-on: self-hosted
@@ -39,7 +41,7 @@ jobs:
             echo "Hash mismatch"; \
             exit 1; \
           fi
-      - name: Add secrets
+      - name: Add/update secrets
         run: |
           kubectl --dry-run=client -o yaml --namespace civicactions-content create secret generic civicactions-content \
           --from-literal=JWT_SECRET='${{ secrets.JWT_SECRET }}' \
@@ -55,4 +57,5 @@ jobs:
           --from-literal=STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN='${{ secrets.STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -
       - name: Run Skaffold
-        run: skaffold run
+        # If we are on a tag, then deploy to production, otherwise to stage:
+        run: echo skaffold run --profile="${{ github.ref_type == 'tag' && 'production' || 'stage' }}"
