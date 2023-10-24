@@ -11,8 +11,20 @@ jobs:
       SKAFFOLD_VERSION: v2.8.0
       SKAFFOLD_HASH: dd223353a9c0e377ce7618ae99eeb446b2c7fc73718d3ac407beccb9f5127de4
     steps:
-      - uses: actions/checkout@v1
-      - uses: azure/setup-kubectl@v1
+      - uses: actions/checkout@v4
+      - uses: azure/setup-kubectl@v3
+      - uses: azure/setup-helm@v3
+      - name: Download Skaffold
+        run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/${{ env.SKAFFOLD_VERSION }}/skaffold-linux-amd64
+      - name: Check and install Skaffold
+        run: |
+          echo "Checking hash before install"
+          if [ "$(sha256sum < skaffold | head -c 64)" = "${{ env.SKAFFOLD_HASH }}" ]; then \
+            sudo install skaffold /usr/local/bin/; \
+          else \
+            echo "Hash mismatch"; \
+            exit 1; \
+          fi
       - name: Auth Kubernetes to GCR
         run: |
           kubectl --dry-run=client -o yaml --namespace civicactions-content create secret docker-registry regcred \
@@ -30,17 +42,6 @@ jobs:
           registry: gcr.io
           username: _json_key
           password: ${{ secrets.GCR_KEY }}
-      - name: Download Skaffold
-        run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/${{ env.SKAFFOLD_VERSION }}/skaffold-linux-amd64
-      - name: Check and install Skaffold
-        run: |
-          echo "Checking hash before install"
-          if [ "$(sha256sum < skaffold | head -c 64)" = "${{ env.SKAFFOLD_HASH }}" ]; then \
-            sudo install skaffold /usr/local/bin/; \
-          else \
-            echo "Hash mismatch"; \
-            exit 1; \
-          fi
       - name: Add/update secrets
         run: |
           kubectl --dry-run=client -o yaml --namespace civicactions-content create secret generic civicactions-content \
