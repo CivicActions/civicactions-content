@@ -51,3 +51,6 @@ profiles:
               environment: stage
               databaseName: stage
               gcsBasePath: stage
+              stageSync.enabled: true
+              stageSync.source.databaseName: strapi4
+              stageSync.source.gcsBasePath: production

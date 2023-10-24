@@ -5,7 +5,7 @@ on:
     tags:
       - v*
 jobs:
-  deploy:
+  setup:
     runs-on: self-hosted
     env:
       SKAFFOLD_VERSION: v2.8.0
@@ -53,9 +53,22 @@ jobs:
           --from-literal=APP_KEYS='${{ secrets.APP_KEYS }}' \
           --from-literal=API_TOKEN_SALT='${{ secrets.API_TOKEN_SALT }}' \
           --from-literal=TRANSFER_TOKEN_SALT='${{ secrets.TRANSFER_TOKEN_SALT }}' \
+          --from-literal=PROD_TRANSFER_TOKEN='${{ secrets.PROD_TRANSFER_TOKEN }}' \
           --from-literal=MAILGUN_API_KEY='${{ secrets.MAILGUN_API_KEY }}' \
           --from-literal=STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN='${{ secrets.STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -
-      - name: Run Skaffold
-        # If we are on a tag, then deploy to production, otherwise to stage:
-        run: echo skaffold run --profile="${{ github.ref_type == 'tag' && 'production' || 'stage' }}"
+  # If we are on a tag, then deploy to production, otherwise to stage:
+  deploy_production:
+    if: ${{ github.ref_type == 'tag' }}
+    runs-on: self-hosted
+    steps:
+      - name: Deploy production site
+        run: skaffold run --profile='production'
+  deploy_stage:
+    if: ${{ github.ref_type != 'tag' }}
+    runs-on: self-hosted
+    steps:
+      - name: Delete stage site
+        run: skaffold delete --profile='stage'
+      - name: Install stage site
+        run: skaffold run --profile='stage' --wait-for-deletions=true

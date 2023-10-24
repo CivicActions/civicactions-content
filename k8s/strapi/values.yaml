@@ -1,9 +1,14 @@
 ## Image is required
 # image:
 
-## Environment - production or review
-# environment:
-
-## Primary production settings
+## Environment settings
 # databaseName:
 # gcsBasePath:
+
+## Stage site sync source
+## NOTE: Enabling this this will, on install, delete all content from the above locations and replace with data from source locations
+# stageSync:
+#   enabled: false
+#   source:
+#     databaseName:
+#     gcsBasePath:

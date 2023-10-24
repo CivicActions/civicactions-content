@@ -1,0 +1,104 @@
+# If stageSync is set:
+{{- if .Values.stageSync.enabled }}
+{{- if ne .Values.stageSync.source.databaseName "" }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-database-{{ randAlphaNum 5 | lower }}"
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    # This is what defines this resource as a hook. Without this line, the
+    # job is considered part of the release.
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: "{{ .Release.Name }}"
+      labels:
+        app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+        app.kubernetes.io/instance: {{ .Release.Name | quote }}
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    spec:
+      restartPolicy: Never
+      imagePullSecrets:
+        - name: regcred
+      containers:
+      - name: pre-install-job
+        image: "postgres:12"
+        command: ["sh", "-c"]
+        args:
+        - |
+          psql -h "$(DATABASE_HOST)" -U strapi -c "DROP DATABASE {{ .Values.databaseName }};"
+          psql -h "$(DATABASE_HOST)" -U strapi -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE usename = 'strapi' AND pid <> pg_backend_pid();"
+          psql -h "$(DATABASE_HOST)" -U strapi -c "CREATE DATABASE {{ .Values.databaseName }} WITH TEMPLATE {{ .Values.stageSync.source.databaseName }} OWNER strapi;"
+          psql -h "$(DATABASE_HOST)" -U strapi "{{ .Values.databaseName }}" -c "UPDATE files SET \
+            url = REPLACE(url, \
+              'ca-it-prod-home-5918-strapi/{{ .Values.stageSync.source.gcsBasePath }}', \
+              'ca-it-prod-home-5918-strapi/{{ .Values.gcsBasePath }}'), \
+            formats = REPLACE(formats::text, \
+              'ca-it-prod-home-5918-strapi/{{ .Values.stageSync.source.gcsBasePath }}', \
+              'ca-it-prod-home-5918-strapi/{{ .Values.gcsBasePath }}')::jsonb;"
+        env:
+        - name: DATABASE_HOST
+          valueFrom:
+            secretKeyRef:
+                name: civicactions-content
+                key: DATABASE_HOST
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+                name: civicactions-content
+                key: DATABASE_PASSWORD
+{{- end }}
+---
+{{- if ne .Values.stageSync.source.databaseName "" }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-files-{{ randAlphaNum 5 | lower }}"
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    # This is what defines this resource as a hook. Without this line, the
+    # job is considered part of the release.
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: "{{ .Release.Name }}"
+      labels:
+        app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+        app.kubernetes.io/instance: {{ .Release.Name | quote }}
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    spec:
+      restartPolicy: Never
+      imagePullSecrets:
+        - name: regcred
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: civicactions-content
+      containers:
+      - name: pre-install-job
+        image: "gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine"
+        command: ["gsutil"]
+        args: ["-o", "Credentials:gs_service_key_file=/etc/secret-volume/GCS_SERVICE_ACCOUNT", "rsync", "-r", "gs://ca-it-prod-home-5918-strapi/{{ .Values.stageSync.source.gcsBasePath }}", "gs://ca-it-prod-home-5918-strapi/{{ .Values.gcsBasePath }}"]
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/etc/secret-volume"
+{{- end }}
+{{- end }}
