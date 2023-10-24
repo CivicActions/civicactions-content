@@ -1,16 +1,30 @@
 on:
   push:
     branches:
-      - main
+      - "*"
+    tags:
+      - v*
 jobs:
-  deploy:
+  setup:
     runs-on: self-hosted
     env:
       SKAFFOLD_VERSION: v2.8.0
       SKAFFOLD_HASH: dd223353a9c0e377ce7618ae99eeb446b2c7fc73718d3ac407beccb9f5127de4
     steps:
-      - uses: actions/checkout@v1
-      - uses: azure/setup-kubectl@v1
+      - uses: actions/checkout@v4
+      - uses: azure/setup-kubectl@v3
+      - uses: azure/setup-helm@v3
+      - name: Download Skaffold
+        run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/${{ env.SKAFFOLD_VERSION }}/skaffold-linux-amd64
+      - name: Check and install Skaffold
+        run: |
+          echo "Checking hash before install"
+          if [ "$(sha256sum < skaffold | head -c 64)" = "${{ env.SKAFFOLD_HASH }}" ]; then \
+            sudo install skaffold /usr/local/bin/; \
+          else \
+            echo "Hash mismatch"; \
+            exit 1; \
+          fi
       - name: Auth Kubernetes to GCR
         run: |
           kubectl --dry-run=client -o yaml --namespace civicactions-content create secret docker-registry regcred \
@@ -28,18 +42,7 @@ jobs:
           registry: gcr.io
           username: _json_key
           password: ${{ secrets.GCR_KEY }}
-      - name: Download Skaffold
-        run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/${{ env.SKAFFOLD_VERSION }}/skaffold-linux-amd64
-      - name: Check and install Skaffold
-        run: |
-          echo "Checking hash before install"
-          if [ "$(sha256sum < skaffold | head -c 64)" = "${{ env.SKAFFOLD_HASH }}" ]; then \
-            sudo install skaffold /usr/local/bin/; \
-          else \
-            echo "Hash mismatch"; \
-            exit 1; \
-          fi
-      - name: Add secrets
+      - name: Add/update secrets
         run: |
           kubectl --dry-run=client -o yaml --namespace civicactions-content create secret generic civicactions-content \
           --from-literal=JWT_SECRET='${{ secrets.JWT_SECRET }}' \
@@ -51,8 +54,16 @@ jobs:
           --from-literal=APP_KEYS='${{ secrets.APP_KEYS }}' \
           --from-literal=API_TOKEN_SALT='${{ secrets.API_TOKEN_SALT }}' \
           --from-literal=TRANSFER_TOKEN_SALT='${{ secrets.TRANSFER_TOKEN_SALT }}' \
+          --from-literal=PROD_TRANSFER_TOKEN='${{ secrets.PROD_TRANSFER_TOKEN }}' \
           --from-literal=MAILGUN_API_KEY='${{ secrets.MAILGUN_API_KEY }}' \
           --from-literal=STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN='${{ secrets.STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -
-      - name: Run Skaffold
-        run: skaffold run
+      # If we are on a tag, then deploy to production, otherwise to stage:
+      - name: Deploy production site
+        if: ${{ github.ref_type == 'tag' }}
+        run: skaffold run --profile='production'
+      - name: Delete and reinstall stage site
+        if: ${{ github.ref_type != 'tag' }}
+        run: |
+          skaffold delete --profile='stage'
+          skaffold run --profile='stage' --wait-for-deletions=true

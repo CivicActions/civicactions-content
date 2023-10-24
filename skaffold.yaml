@@ -22,8 +22,35 @@ build:
     resources:
       requests:
         memory: 2Gi
-manifests:
-  rawYaml:
-    - k8s/civicactions-content.yaml
 deploy:
   kubectl: {}
+profiles:
+  - name: production
+    manifests:
+      helm:
+        releases:
+          - name: v4
+            namespace: civicactions-content
+            chartPath: k8s/strapi
+            setValueTemplates:
+              image: "{{ .IMAGE_FULLY_QUALIFIED_gcr_io_ca_it_prod_shared_5a2c_civicactions_content }}"
+            setValues:
+              environment: production
+              databaseName: strapi4
+              gcsBasePath: production
+  - name: stage
+    manifests:
+      helm:
+        releases:
+          - name: stage
+            namespace: civicactions-content
+            chartPath: k8s/strapi
+            setValueTemplates:
+              image: "{{ .IMAGE_FULLY_QUALIFIED_gcr_io_ca_it_prod_shared_5a2c_civicactions_content }}"
+            setValues:
+              environment: stage
+              databaseName: stage
+              gcsBasePath: stage
+              stageSync.enabled: true
+              stageSync.source.databaseName: strapi4
+              stageSync.source.gcsBasePath: production

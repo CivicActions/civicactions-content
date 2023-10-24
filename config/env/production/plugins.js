@@ -1,3 +1,5 @@
+// NOTE: This applies to stage also - we just alter the specific env vars needed
+// This does not apply to local development though
 module.exports = ({ env }) => ({
   upload: {
     config: {
