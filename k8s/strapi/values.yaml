@@ -7,8 +7,8 @@
 
 ## Stage site sync source
 ## NOTE: Enabling this this will, on install, delete all content from the above locations and replace with data from source locations
-# stageSync:
-#   enabled: false
+stageSync:
+  enabled: false
 #   source:
 #     databaseName:
 #     gcsBasePath:
