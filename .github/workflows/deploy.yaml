@@ -57,18 +57,12 @@ jobs:
           --from-literal=MAILGUN_API_KEY='${{ secrets.MAILGUN_API_KEY }}' \
           --from-literal=STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN='${{ secrets.STRAPI_GITHUB_ACTIONS_TRIGGER_TOKEN }}' \
           --from-literal=GCS_SERVICE_ACCOUNT='${{ secrets.GCS_SERVICE_ACCOUNT }}' | kubectl apply -f -
-  # If we are on a tag, then deploy to production, otherwise to stage:
-  deploy_production:
-    if: ${{ github.ref_type == 'tag' }}
-    runs-on: self-hosted
-    steps:
+      # If we are on a tag, then deploy to production, otherwise to stage:
       - name: Deploy production site
+        if: ${{ github.ref_type == 'tag' }}
         run: skaffold run --profile='production'
-  deploy_stage:
-    if: ${{ github.ref_type != 'tag' }}
-    runs-on: self-hosted
-    steps:
-      - name: Delete stage site
-        run: skaffold delete --profile='stage'
-      - name: Install stage site
-        run: skaffold run --profile='stage' --wait-for-deletions=true
+      - name: Delete and reinstall stage site
+        if: ${{ github.ref_type != 'tag' }}
+        run: |
+          skaffold delete --profile='stage'
+          skaffold run --profile='stage' --wait-for-deletions=true
